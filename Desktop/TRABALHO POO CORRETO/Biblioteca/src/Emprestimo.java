@@ -18,6 +18,7 @@ public class Emprestimo {
 		        System.out.println("Título: " + livro.getTitle());
 		        System.out.println("Autor: " + livro.getAutor());
 		        System.out.println("Código ISBN: " + livro.getISBN());
+		        System.out.println("Emprestimo feito ao leitor: " + leitorAutenticado);
 		       
 		        LocalDate dataEmpres = LocalDate.now();
 		        livro.setData(dataEmpres);
