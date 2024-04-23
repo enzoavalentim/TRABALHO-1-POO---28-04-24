@@ -68,48 +68,45 @@ ArrayList<Cliente> listaClientes = new ArrayList<>(); // Vetor Cadastro de Clien
 			break;
 			
 		case 2: // CADASTRO DE EQUIPAMENTOS //
-			
-			System.out.println("-=-=-=-Cadastro de Produto-=-=-=-=");
-			
-			Equipamentos novoProduto = new Equipamentos(null, 0, 0, null, null, null, 0); // Cria um objeto tipo equipamento vazio
-		
-			System.out.print("\nDigite o tipo do produto: ");
-			String nomeProduto = scanner.nextLine(); //Passar atributo nome do Equipamento
-			novoProduto.setName(nomeProduto); // Seta o nome de acordo com o parametro passado
-			
-			
-			int newIdProd; // Setar Id do Produto
-			boolean idUnicoProd = false;
-			
-			do {
-			    
-			    newIdProd = Equipamentos.gerarIdProduto(); // Gera um ID aleatório para o cliente
-			    
-			    
-			    idUnicoProd = true; // Assume que o ID é único
-			    for(Cliente cliente : listaClientes) {
-			        if (cliente.getId() == newIdProd) {
-			            idUnicoProd = false; // O ID não é único, então precisamos gerar um novo
-			            break; // Sai do loop assim que encontrar um ID duplicado
-			        }
-			    }
-			} while (!idUnicoProd); 
-			
-			novoProduto.setId(newIdProd);
-			
-			
-			System.out.print("\nDigite o valor da diaria do produto: ");
-			double vlDiaria = scanner.nextDouble();  // Setar o valor da diaria do equipamento
-			novoProduto.setVlLoc(vlDiaria);
-			
-			listaEquipamentos.add(novoProduto); // Adiciona o equipamento cadastrado a lista de equipamentos 
-			
-			System.out.println("\nNovo equipamento cadastrado com sucesso!");
-			System.out.println("\nNome: " + novoProduto.getName());
-			System.out.println("Id: " + novoProduto.getId());
-			System.out.println("Valor da Locação diaria: " + "R$" + novoProduto.getVlLoc());
-			
-			break;
+
+		    System.out.println("-=-=-=-Cadastro de Produto-=-=-=-=");
+
+		    Equipamentos novoProduto = new Equipamentos(null, 0, 0, null, null, null, 0); // Cria um objeto tipo equipamento vazio
+
+		    System.out.print("\nDigite o tipo do produto: ");
+		    String nomeProduto = scanner.nextLine(); // Passar atributo nome do Equipamento
+		    novoProduto.setName(nomeProduto); // Seta o nome de acordo com o parametro passado
+
+		    int newIdProd; // Setar Id do Produto
+		    boolean idUnicoProd = false;
+
+		    do {
+		        newIdProd = Equipamentos.gerarIdProduto(); // Gera um ID aleatório para o produto
+
+		        idUnicoProd = true; // Assume que o ID é único
+		        for (Equipamentos equipamento : listaEquipamentos) {
+		            if (equipamento.getId() == newIdProd) {
+		                idUnicoProd = false; // O ID não é único, então precisamos gerar um novo
+		                break; // Sai do loop assim que encontrar um ID duplicado
+		            }
+		        }
+		    } while (!idUnicoProd);
+
+		    novoProduto.setId(newIdProd);
+
+		    System.out.print("\nDigite o valor da diaria do produto: ");
+		    double vlDiaria = scanner.nextDouble(); // Setar o valor da diaria do equipamento
+		    novoProduto.setVlLoc(vlDiaria);
+
+		    listaEquipamentos.add(novoProduto); // Adiciona o equipamento cadastrado a lista de equipamentos 
+
+		    System.out.println("\nNovo equipamento cadastrado com sucesso!");
+		    System.out.println("\nNome: " + novoProduto.getName());
+		    System.out.println("Id: " + novoProduto.getId());
+		    System.out.println("Valor da Locação diaria: " + "R$" + novoProduto.getVlLoc());
+
+		    break;
+
 			
 		case 3:	// ALUGUEL DE EQUIPAMENTOS // 
 			
@@ -154,9 +151,9 @@ ArrayList<Cliente> listaClientes = new ArrayList<>(); // Vetor Cadastro de Clien
 			
 			
 			System.out.println("\nDigite o nome do Equipamento a ser locado: ");
-			String nomeEquipAutentic = scanner.nextLine();  // Nome do equipamento que está alugando
-			scanner.nextLine();
+			String nomeEquipAutentic = scanner.next();  // Nome do equipamento que está alugando
 			
+						
 			System.out.println("\nDigite o Id do equipamento a ser locado: ");
 			int IdEquipAutentic = scanner.nextInt(); // Id do cliente que está alugando
 			
@@ -164,15 +161,15 @@ ArrayList<Cliente> listaClientes = new ArrayList<>(); // Vetor Cadastro de Clien
 			novaLoc.novaLocacao(nomeEquipAutentic, IdEquipAutentic, listaEquipamentos, clienteAutentic);
 			break;
 			
-		case 4:
+		case 4: // IMPRIMIR EQUIPAMENTOS CADASTRADOS //
 			
 			System.out.println(listaEquipamentos.toString());
+			break;	
 				
-				
-		case 5:
+		case 5: // IMPRIMIR CLIENTES CADASTRADOS //
 			
 			System.out.println(listaClientes.toString());
-			
+			break;
 			
 			
 			

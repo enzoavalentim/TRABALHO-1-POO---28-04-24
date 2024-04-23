@@ -12,7 +12,11 @@ public class Locacao {
 		boolean equipEncontrado = false; // Variável para rastrear se o equipamento foi encontrado
 		
 		for (Equipamentos equipamento : listaEquipamentos) { // Verifica se o s parametros passados conferem com os atribudos de algum dos objetos cliente cadastrados
-		if (equipamento.getName().equals(nomeEquipAutentic) && equipamento.getId() == IdEquipAutentic && equipamento.getDateLoc() == null)  { 
+		System.out.println("print "+equipamento.getName()+" "+nomeEquipAutentic);
+		System.out.println("print "+equipamento.getId()+" "+IdEquipAutentic);
+
+			
+			if (equipamento.getName().equals(nomeEquipAutentic) && equipamento.getId() == IdEquipAutentic && equipamento.getDateLoc() == null)  { 
 			 
 			System.out.println("Digite por quanto dias o Produto será Locado: ");
 			int nDiasLoca = scanner.nextInt();
