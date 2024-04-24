@@ -10,14 +10,15 @@ ArrayList<Equipamentos> listaEquipamentos = new ArrayList<>(); // Vetor Cadastro
 ArrayList<Cliente> listaClientes = new ArrayList<>(); // Vetor Cadastro de Clientes
 
 
-	while (escolha != 5) {
+	while (escolha != 7) {
 	
-		System.out.println("\n-=-=-=Menu Geral-=-=-=-");
+		System.out.println("-=-=-=Menu Geral-=-=-=-");
 		System.out.print("\n1. Cadastar Cliente");
 		System.out.print("\n2. Cadastrar Produto");
 		System.out.print("\n3. Aluguel de equipamentos");
-		System.out.print("\n4. Lista de equipamentos");
-		System.out.print("\n5. Lista de clientes");
+		System.out.print("\n4. Devolução de equipamentos");
+		System.out.print("\n5. Lista de equipamentos");
+		System.out.print("\n6. Lista de clientes");
 		System.out.print("\nEscolha uma das opções: ");
 	
 		escolha = scanner.nextInt();
@@ -28,7 +29,7 @@ ArrayList<Cliente> listaClientes = new ArrayList<>(); // Vetor Cadastro de Clien
 		
 		case 1: // CADASTRO DE CLIENTES //
 			
-			System.out.println("-=-=-=-Cadastro de Cliente-=-=-=-=");
+			System.out.println("\n-=-=-=-Cadastro de Cliente-=-=-=-=");
 			
 			Cliente novoCliente = new Cliente(null, 0); // Cria um objeto tipo cliente vazio
 
@@ -152,6 +153,7 @@ ArrayList<Cliente> listaClientes = new ArrayList<>(); // Vetor Cadastro de Clien
 			
 			System.out.println("\nDigite o nome do Equipamento a ser locado: ");
 			String nomeEquipAutentic = scanner.next();  // Nome do equipamento que está alugando
+			scanner.nextLine();
 			
 						
 			System.out.println("\nDigite o Id do equipamento a ser locado: ");
@@ -161,16 +163,46 @@ ArrayList<Cliente> listaClientes = new ArrayList<>(); // Vetor Cadastro de Clien
 			novaLoc.novaLocacao(nomeEquipAutentic, IdEquipAutentic, listaEquipamentos, clienteAutentic);
 			break;
 			
-		case 4: // IMPRIMIR EQUIPAMENTOS CADASTRADOS //
+		case 4: // DEVOLUÇÃO DE EQUIPAMENTOS //
 			
-			System.out.println(listaEquipamentos.toString());
+			System.out.println("\nLista de Clientes Cadastrados:");
+			for(Cliente cliente:listaClientes) { // Vai mostrar todos os clientes cadastrados
+				
+				System.out.println("\nNome: " + cliente.getName());
+				System.out.println("Id: " + cliente.getId());
+			}
+			
+			System.out.println("\nDigite o nome do cliente que está fazendo a devolução: ");
+			String nomeCliDev = scanner.nextLine();
+			
+			System.out.println("Digite o ID do cliente que está fazendo a devolução: ");
+			int idCliDev = scanner.nextInt();
+			
+			Devolucao novaDev = new Devolucao();
+			novaDev.novaDevolucao(nomeCliDev, idCliDev, listaClientes, listaEquipamentos);
+			
+			break;
+			
+			
+	
+		case 5: // IMPRIMIR EQUIPAMENTOS CADASTRADOS //
+			for(Equipamentos equipamento : listaEquipamentos) {
+				
+				System.out.println("\n" + equipamento.getName());
+				System.out.println(equipamento.getId());
+				System.out.println(equipamento.getVlLoc());
+				System.out.println(equipamento.getDateLoc());
+				System.out.println(equipamento.getDateDev());
+				System.out.println(equipamento.getClienteName());
+				System.out.println(equipamento.getClienteId());
+			}
 			break;	
 				
-		case 5: // IMPRIMIR CLIENTES CADASTRADOS //
+		case 6: // IMPRIMIR CLIENTES CADASTRADOS //
 			
 			System.out.println(listaClientes.toString());
 			break;
-			
+
 			
 			
 		
