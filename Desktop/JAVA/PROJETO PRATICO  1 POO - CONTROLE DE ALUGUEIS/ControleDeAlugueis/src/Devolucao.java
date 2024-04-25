@@ -8,13 +8,15 @@ public class Devolucao {
     public void novaDevolucao(String nomeCliDev, int idCliDev, ArrayList<Cliente> listaClientes, ArrayList<Equipamentos> listaEquipamentos) {
         boolean clienteEncontrado = false;
         for (Cliente cliente : listaClientes) { // Procura o cliente digitado
-            if (cliente.getName().equals(nomeCliDev) && cliente.getId() == idCliDev) {
+            if (cliente.getName().equals(nomeCliDev) && cliente.getId() == idCliDev) { // Encontra cliente que esta alugando
                 clienteEncontrado = true;
+                
                 System.out.println("\nEquipamentos alugados por " + nomeCliDev + ":");
+                
                 boolean equipamentoEncontrado = false;
                 
                 for (Equipamentos equipamento : listaEquipamentos) { // Procura os equipamentos que o cliente alugou 
-                    if (equipamento.getClienteName().equals(nomeCliDev) && equipamento.getClienteId() == idCliDev) {
+                    if (equipamento.getDateLoc() != null && equipamento.getClienteName().equals(nomeCliDev) && equipamento.getClienteId() == idCliDev) {
                         System.out.println("\nNome: " + equipamento.getName());
                         System.out.println("ID: " + equipamento.getId());
                         System.out.println("Data da Locação: " + equipamento.getDateLoc());
@@ -25,16 +27,25 @@ public class Devolucao {
                 
                 if (!equipamentoEncontrado) {
                     System.out.println("Nenhum equipamento alugado por " + nomeCliDev + ".");
-                } else {
+                    break;
+                	} 
+                
+                else {
                     break; // Sai do loop de clientes após encontrar os equipamentos alugados
-                }
+                	}
             }
         }
         
-        if (!clienteEncontrado) {
+        	if (!clienteEncontrado) {
             System.out.println("Cliente não encontrado.");
             return; // Sai do método se o cliente não for encontrado
-        }
+        	}
+        	
+        	
+        	
+        	
+        	
+        	
         
         System.out.println("\nDIgite o nome do equipamento que será devolvido: ");
         String nomeEquipDev = scanner.nextLine();

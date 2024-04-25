@@ -17,8 +17,7 @@ ArrayList<Cliente> listaClientes = new ArrayList<>(); // Vetor Cadastro de Clien
 		System.out.print("\n2. Cadastrar Produto");
 		System.out.print("\n3. Aluguel de equipamentos");
 		System.out.print("\n4. Devolução de equipamentos");
-		System.out.print("\n5. Lista de equipamentos");
-		System.out.print("\n6. Lista de clientes");
+		System.out.print("\n5. Central de relatórios");
 		System.out.print("\nEscolha uma das opções: ");
 	
 		escolha = scanner.nextInt();
@@ -185,29 +184,80 @@ ArrayList<Cliente> listaClientes = new ArrayList<>(); // Vetor Cadastro de Clien
 			
 			
 	
-		case 5: // IMPRIMIR EQUIPAMENTOS CADASTRADOS //
-			for(Equipamentos equipamento : listaEquipamentos) {
+		case 5: // CENTRAL DE  RELATORIOS 
+			
+			int escolhaRelatorios = 0;
+			while (escolha != 6) {
 				
-				System.out.println("\n" + equipamento.getName());
-				System.out.println(equipamento.getId());
-				System.out.println(equipamento.getVlLoc());
-				System.out.println(equipamento.getDateLoc());
-				System.out.println(equipamento.getDateDev());
-				System.out.println(equipamento.getClienteName());
-				System.out.println(equipamento.getClienteId());
-			}
-			break;	
+				System.out.println("-=-=-=CENTRAL DE RELATÓRIOS-=-=-=-");
+				System.out.print("\n1. Lista de equipamentos cadastrados");
+				System.out.print("\n2. Lista de clientes cadastrados");
+				System.out.print("\n3. Lista de alugueis");
+				System.out.print("\n4. Lista de alugueis por cliente");
+				System.out.print("\n5. Relatório mensal e faturamento");
+				System.out.print("\n6. Sair");
+				System.out.print("\nEscolha uma das opções: ");
 				
-		case 6: // IMPRIMIR CLIENTES CADASTRADOS //
-			
-			System.out.println(listaClientes.toString());
-			break;
-
-			
-			
-		
-		
-			
+				escolha = scanner.nextInt();
+				scanner.nextLine();
+				
+				switch (escolha) {
+				
+				case 1: // IMPRIMIR TODOS EQUIPAMENTOS CADASTRADOS 
+					
+					if (listaEquipamentos.isEmpty()) {
+						
+						System.out.println("Nenhum equipamento cadastrado no momento");	
+					}
+					
+					else {
+					System.out.println("\nLista de equipamentos cadastrados"); 
+						
+					for(Equipamentos equipamento : listaEquipamentos) {
+						
+						System.out.println("\nNome: " + equipamento.getName());
+						System.out.println("Id: " + equipamento.getId());
+						System.out.println("Valor da locação diaria: " + equipamento.getVlLoc());
+						System.out.println(equipamento.getClienteName());
+						if(equipamento.getDateLoc() == null) {
+							
+							System.out.println("Status: Disponivel para locação");
+							} // Fecha if
+						
+						else {
+							System.out.println("Status: indisponivel para locação");
+							} // Fecha else
+						
+						} // fecha for
+					} // Fecha else
+					
+					break;
+				
+				case 2: // IMPRIMIR TODOS OS CLIENTES CADASTRADOS // 
+					
+					
+					if (listaClientes.isEmpty()) {
+						
+						System.out.println("Nenhum cliente cadastrado no momento");	
+					}
+					
+					else {
+					System.out.println("\nLista de clientes cadastrados");
+					
+					for(Cliente cliente:listaClientes) {
+						
+						System.out.println("\n" + cliente.getName());
+						System.out.println(cliente.getId());
+						}
+					}
+					
+				
+					
+					
+					
+				} // Fecha Switch central de relatórios 
+				
+			} // Fecha While central de relatórios			
 			
 		
 		} // Fecha Switch principal
