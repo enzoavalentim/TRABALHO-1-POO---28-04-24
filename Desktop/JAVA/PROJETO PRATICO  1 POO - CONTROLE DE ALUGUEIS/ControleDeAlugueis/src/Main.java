@@ -110,57 +110,62 @@ ArrayList<Cliente> listaClientes = new ArrayList<>(); // Vetor Cadastro de Clien
 			
 		case 3:	// ALUGUEL DE EQUIPAMENTOS // 
 			
-			System.out.println("-=-=-=-Aluguel de Equipamentos-=-=-=-=");
-			
-			System.out.println("\nLista de Clientes Cadastrados:");
-			for(Cliente cliente:listaClientes) { // Vai mostrar todos os clientes cadastrados
-				
-				System.out.println("\nNome: " + cliente.getName());
-				System.out.println("Id: " + cliente.getId());
-			}
-			
-			
-			System.out.println("\nDigite o nome do Locatário: ");
-			String nomeCliAutentic = scanner.nextLine();  // Nome do cliente que está alugando
-			
-			System.out.println("\nDigite o Id do Locatário: ");
-			int IdCliAutentic = scanner.nextInt(); // Id do cliente que está alugando
-			
-			Cliente clienteAutentic = null;
-			
-			for (Cliente cliente : listaClientes) { // Verifica se o s parametros passados conferem com os atribudos de algum dos objetos cliente cadastrados
-				if (cliente.getName().equals(nomeCliAutentic) && cliente.getId() == IdCliAutentic)  { 
-					clienteAutentic = cliente;
-						} // Fecha If
-				else 
-					System.out.println("Este Cliente não existe no sistema");
-				
-				} //Fecha For
-			
-			
-			System.out.println("\nLocatario: " + clienteAutentic.getName());
-			
-			System.out.println("\nLista de Equipamentos Disponiveis:");
-			
-			for(Equipamentos equipamento : listaEquipamentos) { // Vai mostrar todos os equipamentos disponiveis para locação 
-				// fazer if com equipamentos que não estão disponiveis
-				System.out.println("\nNome " + equipamento.getName());
-				System.out.println("Id " + equipamento.getId());
-				System.out.println("Valor da Diaria: " + "R$" + equipamento.getVlLoc());
-			}
-			
-			
-			System.out.println("\nDigite o nome do Equipamento a ser locado: ");
-			String nomeEquipAutentic = scanner.next();  // Nome do equipamento que está alugando
-			scanner.nextLine();
-			
-						
-			System.out.println("\nDigite o Id do equipamento a ser locado: ");
-			int IdEquipAutentic = scanner.nextInt(); // Id do cliente que está alugando
-			
-			Locacao novaLoc = new Locacao();
-			novaLoc.novaLocacao(nomeEquipAutentic, IdEquipAutentic, listaEquipamentos, clienteAutentic);
-			break;
+		    System.out.println("-=-=-=-Aluguel de Equipamentos-=-=-=-=");
+		    System.out.println("\nLista de Clientes Cadastrados:");
+		    for(Cliente cliente:listaClientes) {
+		        System.out.println("\nNome: " + cliente.getName());
+		        System.out.println("Id: " + cliente.getId());
+		    }
+		    
+		    System.out.println("\nDigite o nome do Locatário: ");
+		    String nomeCliAutentic = scanner.nextLine();  
+		    
+		    System.out.println("\nDigite o Id do Locatário: ");
+		    int IdCliAutentic = scanner.nextInt(); 
+		    
+		    Cliente clienteAutentic = null;
+		    
+		    for (Cliente cliente : listaClientes) {
+		        if (cliente.getName().equals(nomeCliAutentic) && cliente.getId() == IdCliAutentic)  { 
+		            clienteAutentic = cliente;
+		            break;
+		        } 
+		    }
+		    
+		    if (clienteAutentic == null) {
+		        System.out.println("Este Cliente não existe no sistema"); 
+		        break; // 
+		    }
+		    
+		    System.out.println("\nLocatario: " + clienteAutentic.getName());
+		    
+		    System.out.println("\nLista de Equipamentos Disponiveis:");
+		    
+		    boolean nenhumEquipamentoDisponivel = true;
+		    for(Equipamentos equipamento : listaEquipamentos) {
+		        if(equipamento.getDateLoc() == null) {
+		            nenhumEquipamentoDisponivel = false;
+		            System.out.println("\nNome " + equipamento.getName());
+		            System.out.println("Id " + equipamento.getId());
+		            System.out.println("Valor da Diaria: " + "R$" + equipamento.getVlLoc());
+		        }
+		    }
+		    
+		    if (nenhumEquipamentoDisponivel) {
+		        System.out.println("\nNenhum equipamento disponível para locação.");
+		        break; // Se não houver equipamento disponível, sair do case 3
+		    }
+		    
+		    System.out.println("\nDigite o nome do Equipamento a ser locado: ");
+		    String nomeEquipAutentic = scanner.next();  
+		    
+		    System.out.println("\nDigite o Id do equipamento a ser locado: ");
+		    int IdEquipAutentic = scanner.nextInt(); 
+		    
+		    Locacao novaLoc = new Locacao();
+		    novaLoc.novaLocacao(nomeEquipAutentic, IdEquipAutentic, listaEquipamentos, clienteAutentic);
+		    break;
+
 			
 		case 4: // DEVOLUÇÃO DE EQUIPAMENTOS //
 			

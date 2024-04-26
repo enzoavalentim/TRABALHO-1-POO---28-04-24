@@ -46,6 +46,10 @@ public class Locacao {
               
               equipamento.setClienteName(clienteAutentic.getName()); // Seta o nome do cliente que está alugando o equipamento
               equipamento.setClienteId(clienteAutentic.getId());  // Seta o id do cliente que está alugando o equipamento
+              
+              Alugueis novoAluguel = new Alugueis();
+              novoAluguel.locacaoA(equipamento.getName(), equipamento.getId(), equipamento.getDateLoc(), equipamento.getDateDev(), vlTotalLoc, equipamento.getClienteName(), equipamento.getClienteId());
+              
           
               equipEncontrado = true; 
               break;
@@ -59,3 +63,6 @@ public class Locacao {
     }
 }
 	}
+
+
+
