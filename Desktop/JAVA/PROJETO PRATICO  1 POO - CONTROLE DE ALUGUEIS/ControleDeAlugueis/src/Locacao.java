@@ -5,10 +5,11 @@ import java.util.Scanner;
 
 public class Locacao {
 	
+	
 	Scanner scanner = new Scanner(System.in);
 
 	
-	public void novaLocacao(String nomeEquipAutentic, int IdEquipAutentic, ArrayList<Equipamentos> listaEquipamentos, Cliente clienteAutentic){
+	public void novaLocacao(String nomeEquipAutentic, int IdEquipAutentic, ArrayList<Equipamentos> listaEquipamentos, Cliente clienteAutentic, ArrayList<Alugueis> listaAluguel){
 	
 		boolean equipEncontrado = false; // Variável para rastrear se o equipamento foi encontrado
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy"); 
@@ -27,7 +28,7 @@ public class Locacao {
 			
 			System.out.println("\nDados da Locação:");
 			System.out.println("\nNome do locatario: " + clienteAutentic.getName() + " - Id " + clienteAutentic.getId()); // Imprime dados do cliente que locou o produto
-			System.out.println("\nProduto Locado: " + equipamento.getName()); // Imprime nome do equipamento locado
+			System.out.println("\nProdutSo Locado: " + equipamento.getName()); // Imprime nome do equipamento locado
 			System.out.println("Id do produto: " + equipamento.getId()); // Imprime id do equipamento locado
 			
 			
@@ -47,11 +48,9 @@ public class Locacao {
               equipamento.setClienteName(clienteAutentic.getName()); // Seta o nome do cliente que está alugando o equipamento
               equipamento.setClienteId(clienteAutentic.getId());  // Seta o id do cliente que está alugando o equipamento
               
-              Alugueis novoAluguel = new Alugueis();
-              novoAluguel.locacaoA(equipamento.getName(), equipamento.getId(), equipamento.getDateLoc(), equipamento.getDateDev(), vlTotalLoc, equipamento.getClienteName(), equipamento.getClienteId());
-              
-          
-              equipEncontrado = true; 
+              Alugueis novoAluguel = new Alugueis(equipamento.getName(), equipamento.getId(), vlTotalLoc, equipamento.getDateLoc(), equipamento.getDateDev(), equipamento.getClienteName(), equipamento.getClienteId());              
+              listaAluguel.add(novoAluguel); 
+              equipEncontrado = true;
               break;
             
             
@@ -63,6 +62,3 @@ public class Locacao {
     }
 }
 	}
-
-
-

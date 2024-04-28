@@ -5,7 +5,7 @@ public class Devolucao {
 	
 	Scanner scanner = new Scanner(System.in);
     
-    public void novaDevolucao(String nomeCliDev, int idCliDev, ArrayList<Cliente> listaClientes, ArrayList<Equipamentos> listaEquipamentos) {
+    public void novaDevolucao(String nomeCliDev, int idCliDev, ArrayList<Cliente> listaClientes, ArrayList<Equipamentos> listaEquipamentos, ArrayList<Alugueis> listaAluguel) {
         boolean clienteEncontrado = false;
         for (Cliente cliente : listaClientes) { // Procura o cliente digitado
             if (cliente.getName().equals(nomeCliDev) && cliente.getId() == idCliDev) { // Encontra cliente que esta alugando
@@ -65,6 +65,7 @@ public class Devolucao {
                 return; // Sai do método após encontrar e devolver o equipamento
             }
         }
+        
         
         System.out.println("Equipamento não encontrado ou não está alugado por " + nomeCliDev + ".");
     }

@@ -8,6 +8,7 @@ public class Main {
 		
 ArrayList<Equipamentos> listaEquipamentos = new ArrayList<>(); // Vetor Cadastro de Equipamentos
 ArrayList<Cliente> listaClientes = new ArrayList<>(); // Vetor Cadastro de Clientes
+ArrayList<Alugueis> listaAluguel = new ArrayList<>();
 
 
 	while (escolha != 7) {
@@ -163,7 +164,8 @@ ArrayList<Cliente> listaClientes = new ArrayList<>(); // Vetor Cadastro de Clien
 		    int IdEquipAutentic = scanner.nextInt(); 
 		    
 		    Locacao novaLoc = new Locacao();
-		    novaLoc.novaLocacao(nomeEquipAutentic, IdEquipAutentic, listaEquipamentos, clienteAutentic);
+		    novaLoc.novaLocacao(nomeEquipAutentic, IdEquipAutentic, listaEquipamentos, clienteAutentic, listaAluguel);
+		    
 		    break;
 
 			
@@ -183,7 +185,7 @@ ArrayList<Cliente> listaClientes = new ArrayList<>(); // Vetor Cadastro de Clien
 			int idCliDev = scanner.nextInt();
 			
 			Devolucao novaDev = new Devolucao();
-			novaDev.novaDevolucao(nomeCliDev, idCliDev, listaClientes, listaEquipamentos);
+			novaDev.novaDevolucao(nomeCliDev, idCliDev, listaClientes, listaEquipamentos, listaAluguel);
 			
 			break;
 			
@@ -222,9 +224,7 @@ ArrayList<Cliente> listaClientes = new ArrayList<>(); // Vetor Cadastro de Clien
 						
 						System.out.println("\nNome: " + equipamento.getName());
 						System.out.println("Id: " + equipamento.getId());
-						System.out.println("Valor da locação diaria: " + equipamento.getVlLoc());
-						System.out.println(equipamento.getClienteName());
-						if(equipamento.getDateLoc() == null) {
+						System.out.println("Valor da locação diaria: " + equipamento.getVlLoc());						if(equipamento.getDateLoc() == null) {
 							
 							System.out.println("Status: Disponivel para locação");
 							} // Fecha if
@@ -255,10 +255,78 @@ ArrayList<Cliente> listaClientes = new ArrayList<>(); // Vetor Cadastro de Clien
 						System.out.println(cliente.getId());
 						}
 					}
+					break;
 					
-				
+				case 3:  // IMPRIMIR TODOS OS ALUGUEIS JA FEITOS CADASTRADOS // 
+					
+				    for(Alugueis aluguel:  listaAluguel) {
+				       System.out.println("\nEquipamento Locado: " + aluguel.getLocName());
+				       System.out.println("ID: " + aluguel.getLocId());
+				       System.out.println("Valor da Locação: " + aluguel.getLocVlLoc());
+				       System.out.println("Locatario: " + aluguel.getLocClienteName());
+				       System.out.println("ID Locatario: " + aluguel.getLocClienteId());
+				       System.out.println("Data de Locação: " + aluguel.getLoDateLoc());
+				       System.out.println("Data de Devolução: " + aluguel.getLocDateDev());
+				       }
+				    break;
+				        
+
 					
 					
+				case 4:  // IMPRIMIR TODOS OS ALUGUEIS FEITOS POR CADA CLIENTE // 
+					
+					System.out.println("\nDigite o nome do cliente que deseja ver a lista de equipamentos alugados: ");
+					String nomeCliAlug = scanner.nextLine();
+					
+					System.out.println("Digite o ID do cliente que deseja ver a lista de equipamentos alugados: ");
+					int idCliAlug = scanner.nextInt();
+					
+					
+	                boolean equipamentoAlug = false;
+	                
+	                for (Alugueis aluguel : listaAluguel) { // Procura os equipamentos que o cliente alugou 
+	                    if (aluguel.getLocClienteName().equals(nomeCliAlug) && aluguel.getLocClienteId() == idCliAlug) {
+	                        System.out.println("\nNome: " + aluguel.getLocName());
+	                        System.out.println("ID: " + aluguel.getLocId());
+	                        System.out.println("Data da Locação: " + aluguel.getLoDateLoc());
+	                        System.out.println("Data da devolução: " + aluguel.getLocDateDev());
+	                        equipamentoAlug = true;
+	                    }
+	                }
+	                
+	                if (!equipamentoAlug) {
+	                    System.out.println("Nenhum aluguel feito por " + nomeCliAlug + ".");
+	                    break;
+	                	} 
+	                
+	                else {
+	                    break; 
+	                	}
+					
+				case 5:  // CALCULA FATURAMENTO TOTAL // 
+					
+				    double faturamentoTotal = 0;
+				    
+				    for (Alugueis aluguel : listaAluguel) {
+				        System.out.println("\nEquipamento Locado: " + aluguel.getLocName());
+				        System.out.println("ID: " + aluguel.getLocId());
+				        System.out.println("Valor da Locação: " + aluguel.getLocVlLoc());
+				        System.out.println("Locatario: " + aluguel.getLocClienteName());
+				        System.out.println("ID Locatario: " + aluguel.getLocClienteId());
+				        System.out.println("Data de Locação: " + aluguel.getLoDateLoc());
+				        System.out.println("Data de Devolução: " + aluguel.getLocDateDev());
+				        
+				        // Adicionar o valor da locação ao faturamento total
+				        faturamentoTotal += aluguel.getLocVlLoc();
+				    }
+				    
+				    System.out.println("\nO FATURAMENTO TOTAL FOI DE R$" + faturamentoTotal);
+				    break;
+
+					            		
+					            		
+					             
+					            	
 					
 				} // Fecha Switch central de relatórios 
 				
@@ -271,7 +339,5 @@ ArrayList<Cliente> listaClientes = new ArrayList<>(); // Vetor Cadastro de Clien
 		
 	} // Fecha Public Static void Main
 
-
-
-} // Fecha class Main
+	} // Fecha class Main
 
